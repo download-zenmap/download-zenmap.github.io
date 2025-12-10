@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+ 
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link
+         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+         rel="stylesheet">
+ 
+     <title>Getting Started with Zenmap: A Beginner's Guide</title>
+     <meta name="description" content="This beginner's guide to Zenmap will walk you through your first scan, explaining the interface, scan profiles, and how to interpret the results.">
+     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+     <!-- Additional CSS Files -->
+     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+     <link rel="stylesheet" href="../assets/css/templatemo-training-studio.css">
+ 
+     <!-- Open Graph -->
+     <meta property="og:title" content="Getting Started with Zenmap: A Beginner's Guide">
+     <meta property="og:description" content="Learn the basics of Zenmap, from running your first scan to understanding the results.">
+     <meta property="og:type" content="article">
+     <meta property="og:url" content="https://download-zenmap.github.io/guide/getting-started-with-zenmap-a-beginners-guide.html">
+     <meta property="og:image" content="https://download-zenmap.github.io/assets/images/guide/2.png">
+ 
+     <!-- Schema.org -->
+     <script type="application/ld+json">
+     {
+       "@context": "https://schema.org",
+       "@type": "Article",
+       "headline": "Getting Started with Zenmap: A Beginner's Guide",
+       "author": {
+         "@type": "Organization",
+         "name": "The Zenmap Project"
+       },
+       "publisher": {
+         "@type": "Organization",
+         "name": "Zenmap",
+         "logo": {
+           "@type": "ImageObject",
+           "url": "https://download-zenmap.github.io/assets/images/logo.png"
+         }
+       },
+       "image": "https://download-zenmap.github.io/assets/images/guide/2.png",
+       "url": "https://download-zenmap.github.io/guide/getting-started-with-zenmap-a-beginners-guide.html",
+       "datePublished": "2024-01-11",
+       "dateModified": "2025-01-11",
+       "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://download-zenmap.github.io/guide/getting-started-with-zenmap-a-beginners-guide.html"
+       }
+     }
+     </script>
+ 
+ </head>
+ 
+ <body>
+ 
+     <!-- ***** Header Area Start ***** -->
+     <header class="header-area header-sticky">
+         <div class="container">
+             <div class="row">
+                 <div class="col-12">
+                     <nav class="main-nav">
+                         <!-- ***** Logo Start ***** -->
+                         <a href="/index.html" class="logo">
+                             <img src="../assets/images/logo.png" alt="Zenmap logo" style="width: 120px;"/>
+                         </a>
+                         <!-- ***** Logo End ***** -->
+                         <!-- ***** Menu Start ***** -->
+                         <ul class="nav">
+                             <li><a href="/index.html">Home</a></li>
+                             <li><a href="/history.html">History</a></li>
+                             <li><a href="/aboutus.html">About Us</a></li>
+                             <li><a href="/guide/" class="active">Guide</a></li>
+                         </ul>
+                         <a class='menu-trigger'>
+                             <span>Menu</span>
+                         </a>
+                         <!-- ***** Menu End ***** -->
+                     </nav>
+                 </div>
+             </div>
+         </div>
+     </header>
+     <!-- ***** Header Area End ***** -->
+ 
+     <!-- ***** Article Start ***** -->
+     <section class="section" id="article-content" style="padding-top: 140px; padding-bottom: 80px;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-10 offset-lg-1">
+                     <div class="section-heading">
+                         <h1>Getting Started with Zenmap: A Beginner's Guide</h1>
+                         <img src="../assets/images/line-dec.png" alt="divider">
+                     </div>
+                     <div class="article-body">
+                         <p>So you've just completed your Zenmap download and are ready to dive into the world of network scanning. Zenmap's graphical interface makes the powerful Nmap engine accessible to everyone. This guide will walk you through the basics of using Zenmap, from understanding the interface to running your first scan and interpreting the results. By the end of this article, you'll be comfortable performing basic network discovery and analysis.</p>
+ 
+                         <h3>Understanding the Zenmap Interface</h3>
+                         <p>When you first launch Zenmap, you'll be greeted by a clean and organized interface. Let's break down the main components:</p>
+                         <ul>
+                             <li><strong>Target:</strong> This is where you enter the IP address, hostname, or network range you want to scan.</li>
+                             <li><strong>Profile:</strong> Zenmap comes with several pre-configured scan profiles, such as "Intense scan," "Ping scan," and "Quick scan." These profiles are essentially saved Nmap commands designed for specific tasks. You can also create your own custom profiles.</li>
+                             <li><strong>Command:</strong> This field shows the actual Nmap command that will be executed based on your selected target and profile. You can also manually edit this command for more advanced scans.</li>
+                             <li><strong>Scan Button:</strong> As the name suggests, this button starts the scan.</li>
+                             <li><strong>Output Tabs:</strong> The main area of the window is divided into several tabs that display the scan results in different formats: Nmap Output, Ports/Hosts, Topology, Host Details, and Scans.</li>
+                         </ul>
+ 
+                         <div class="text-center my-4">
+                             <img src="../assets/images/guide/2.png" alt="Zenmap Interface" class="img-fluid">
+                         </div>
+ 
+                         <h3>Running Your First Scan</h3>
+                         <p>Let's perform a simple scan to see Zenmap in action. For this example, we'll scan a well-known public host, `scanme.nmap.org`, which is provided by the Nmap project for testing purposes.</p>
+                         <ol>
+                             <li>In the "Target" field, enter `scanme.nmap.org`.</li>
+                             <li>From the "Profile" dropdown menu, select "Quick scan." This profile is designed to be fast and provides a good overview of the target.</li>
+                             <li>Notice how the "Command" field updates to `nmap -T4 -F scanme.nmap.org`. This is the Nmap command that Zenmap will run.</li>
+                             <li>Click the "Scan" button.</li>
+                         </ol>
+                         <p>Zenmap will now execute the scan. You can watch the progress in the "Nmap Output" tab. Once the scan is complete, the other tabs will be populated with the results.</p>
+ 
+                         <h3>Interpreting the Results</h3>
+                         <p>Now that your first scan is complete, let's look at the results. The most important information is usually found in the "Ports/Hosts" tab.</p>
+                         <ul>
+                             <li><strong>Ports:</strong> This tab shows the ports that were found to be open on the target host, along with the service that is typically associated with that port (e.g., port 80 for HTTP).</li>
+                             <li><strong>Host Details:</strong> This tab provides a summary of the information gathered about the host, including its IP address, hostname, operating system (if detected), and a list of open ports.</li>
+                             <li><strong>Topology:</strong> This tab displays a graphical representation of the network path between your computer and the target. For a single host scan, it will be a simple diagram, but it can become quite complex when scanning entire networks.</li>
+                         </ul>
+                         <p>Exploring these tabs will give you a comprehensive picture of the target system. The "Nmap Output" tab is also valuable, as it contains the raw output from the Nmap engine, which can sometimes include additional details not shown in the other tabs.</p>
+ 
+                         <h3>Next Steps</h3>
+                         <p>Congratulations! You've successfully run your first scan with Zenmap. This is just the beginning of what you can do with this powerful tool. As a next step, try exploring the other scan profiles. An "Intense scan," for example, will take longer but will provide much more detailed information, including service versions and OS detection. You can also try scanning your own local network to discover the devices connected to it. (Always make sure you have permission to scan any network you target.) The journey into network security is a long and rewarding one, and with your Zenmap skills, you're well on your way.</p>
+ 
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- ***** Article End ***** -->
+ 
+     <!-- ***** Footer Start ***** -->
+     <footer>
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <div class="footer-content">
+                         <div class="social-icons">
+                             <a href="https://x.com/github" target="_blank"><i class="fa fa-twitter"></i></a>
+                             <a href="https://www.instagram.com/github/" target="_blank"><i class="fa fa-instagram"></i></a>
+                         </div>
+                         <div class="footer-info">
+                             <p>Email: <a href="mailto:support@download-zenmap.github.io">support@download-zenmap.github.io</a></p>
+                             <p><a href="/privacypolicy.html">Privacy Policy</a></p>
+                         </div>
+                         <div class="copyright">
+                             <p>Copyright &copy; 2025</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </footer>
+ 
+     <script src="../assets/js/jquery-2.1.0.min.js"></script>
+     <script src="../assets/js/popper.js"></script>
+     <script src="../assets/js/bootstrap.min.js"></script>
+     <script src="../assets/js/custom.js"></script>
+ 
+ </body>
+ 
+ </html>

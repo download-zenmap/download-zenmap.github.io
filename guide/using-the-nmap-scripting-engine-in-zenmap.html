@@ -1,0 +1,182 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+ 
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link
+         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+         rel="stylesheet">
+ 
+     <title>Using the Nmap Scripting Engine (NSE) in Zenmap</title>
+     <meta name="description" content="Unlock the full potential of Zenmap by learning how to use the Nmap Scripting Engine (NSE). This guide covers how to run scripts, find vulnerabilities, and automate tasks.">
+     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+     <!-- Additional CSS Files -->
+     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+     <link rel="stylesheet" href="../assets/css/templatemo-training-studio.css">
+ 
+     <!-- Open Graph -->
+     <meta property="og:title" content="Using the Nmap Scripting Engine (NSE) in Zenmap">
+     <meta property="og:description" content="A guide to leveraging the power of NSE within the Zenmap interface.">
+     <meta property="og:type" content="article">
+     <meta property="og:url" content="https://download-zenmap.github.io/guide/using-the-nmap-scripting-engine-in-zenmap.html">
+     <meta property="og:image" content="https://download-zenmap.github.io/assets/images/guide/5.png">
+ 
+     <!-- Schema.org -->
+     <script type="application/ld+json">
+     {
+       "@context": "https://schema.org",
+       "@type": "Article",
+       "headline": "Using the Nmap Scripting Engine (NSE) in Zenmap",
+       "author": {
+         "@type": "Organization",
+         "name": "The Zenmap Project"
+       },
+       "publisher": {
+         "@type": "Organization",
+         "name": "Zenmap",
+         "logo": {
+           "@type": "ImageObject",
+           "url": "https://download-zenmap.github.io/assets/images/logo.png"
+         }
+       },
+       "image": "https://download-zenmap.github.io/assets/images/guide/5.png",
+       "url": "https://download-zenmap.github.io/guide/using-the-nmap-scripting-engine-in-zenmap.html",
+       "datePublished": "2024-01-14",
+       "dateModified": "2025-01-14",
+       "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://download-zenmap.github.io/guide/using-the-nmap-scripting-engine-in-zenmap.html"
+       }
+     }
+     </script>
+ 
+ </head>
+ 
+ <body>
+ 
+     <!-- ***** Header Area Start ***** -->
+     <header class="header-area header-sticky">
+         <div class="container">
+             <div class="row">
+                 <div class="col-12">
+                     <nav class="main-nav">
+                         <!-- ***** Logo Start ***** -->
+                         <a href="/index.html" class="logo">
+                             <img src="../assets/images/logo.png" alt="Zenmap logo" style="width: 120px;"/>
+                         </a>
+                         <!-- ***** Logo End ***** -->
+                         <!-- ***** Menu Start ***** -->
+                         <ul class="nav">
+                             <li><a href="/index.html">Home</a></li>
+                             <li><a href="/history.html">History</a></li>
+                             <li><a href="/aboutus.html">About Us</a></li>
+                             <li><a href="/guide/" class="active">Guide</a></li>
+                         </ul>
+                         <a class='menu-trigger'>
+                             <span>Menu</span>
+                         </a>
+                         <!-- ***** Menu End ***** -->
+                     </nav>
+                 </div>
+             </div>
+         </div>
+     </header>
+     <!-- ***** Header Area End ***** -->
+ 
+     <!-- ***** Article Start ***** -->
+     <section class="section" id="article-content" style="padding-top: 140px; padding-bottom: 80px;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-10 offset-lg-1">
+                     <div class="section-heading">
+                         <h1>Using the Nmap Scripting Engine (NSE) in Zenmap</h1>
+                         <img src="../assets/images/line-dec.png" alt="divider">
+                     </div>
+                     <div class="article-body">
+                         <p>The Nmap Scripting Engine (NSE) is what elevates Nmap from a simple port scanner to a powerful and versatile security auditing tool. NSE allows users to write, share, and run scripts that automate a wide range of networking tasks. Zenmap provides an excellent interface for managing and running these scripts, making the power of NSE accessible to everyone. This guide will show you how to effectively use NSE within Zenmap to discover vulnerabilities, gather detailed information, and automate your security assessments. This is an essential skill for anyone who has gone through the Zenmap download process and wants to unlock its full potential.</p>
+ 
+                         <h3>What is the Nmap Scripting Engine?</h3>
+                         <p>NSE is a feature that allows Nmap to execute scripts written in the Lua programming language. These scripts can perform a variety of tasks, such as:</p>
+                         <ul>
+                             <li><strong>Vulnerability Detection:</strong> Checking for specific, known vulnerabilities in services.</li>
+                             <li><strong>Advanced Version Detection:</strong> Gathering more detailed information about services than a standard version scan.</li>
+                             <li><strong>Backdoor Detection:</strong> Scanning for common backdoors and malware.</li>
+                             <li><strong>Information Gathering:</strong> Discovering more details about a target, such as SNMP information or SMB shares.</li>
+                             <li><strong>Exploitation:</strong> While less common, some scripts can perform simple exploits (use with extreme caution and only with permission).</li>
+                         </ul>
+                         <p>Nmap comes with a large library of over 600 scripts, categorized for easy use.</p>
+ 
+                         <div class="text-center my-4">
+                             <img src="../assets/images/guide/5.png" alt="NSE in Zenmap" class="img-fluid">
+                         </div>
+ 
+                         <h3>Running NSE Scripts in Zenmap</h3>
+                         <p>Zenmap offers several ways to run NSE scripts. The easiest way is through the "Profile" dropdown.</p>
+                         <h4>Using Scan Profiles</h4>
+                         <p>Several of Zenmap's built-in profiles utilize NSE. For example, the "Intense scan" includes the `-sC` option, which runs the default set of scripts. This is a great starting point for a general security assessment. The "Vuln" profile, if available or created, is specifically designed to run scripts from the `vuln` category to check for known vulnerabilities.</p>
+ 
+                         <h4>Using the Scripting Tab</h4>
+                         <p>For more granular control, you can use the "Scripting" tab in the profile editor. To access it, select a profile and click the "Edit Selected Profile" button. In the "Scripting" tab, you can:</p>
+                         <ul>
+                             <li>Select individual scripts to run.</li>
+                             <li>Select entire categories of scripts (e.g., `auth`, `broadcast`, `discovery`, `vuln`).</li>
+                             <li>Provide arguments to scripts. For example, some scripts might require a username or password file.</li>
+                         </ul>
+                         <p>This interface provides a user-friendly way to build complex NSE commands without having to type them out manually.</p>
+ 
+                         <h4>Manual Command Entry</h4>
+                         <p>Of course, you can always run NSE scripts by directly editing the command in the "Command" field. The two main options for running scripts are:</p>
+                         <ul>
+                             <li><strong>-sC:</strong> Runs the default set of scripts. This is equivalent to `--script=default`.</li>
+                             <li><strong>--script <script-name>|<category>|<directory>:</strong> Allows you to specify which scripts to run. You can provide a single script name, a comma-separated list of scripts, a category, or a directory containing your own custom scripts.</li>
+                         </ul>
+                         <p>For example, to run all scripts in the `vuln` category, you would use the command:</p>
+                         <pre><code>nmap --script vuln <target></code></pre>
+ 
+                         <h3>Interpreting NSE Script Output</h3>
+                         <p>The output from NSE scripts is integrated directly into the Zenmap results. You will typically find it in the "Nmap Output" tab, associated with the specific host and port that the script was run against. The output is usually well-formatted and easy to read. For example, a vulnerability scanning script might report that a service is vulnerable to a specific CVE (Common Vulnerabilities and Exposures) and provide a link to more information. The Zenmap interface helps to keep this information organized and accessible.</p>
+ 
+                         <h3>Conclusion: Automating Your Security Audits</h3>
+                         <p>The Nmap Scripting Engine is a powerful force multiplier for any security professional or network administrator. By using NSE within Zenmap, you can automate a significant portion of your security auditing process, from information gathering to vulnerability detection. We highly recommend exploring the full list of available NSE scripts on the Nmap website to get a sense of the vast possibilities. As you become more comfortable with NSE, you can even start writing your own scripts to automate your specific, repetitive tasks. Mastering NSE is a key step in becoming a true Nmap and Zenmap power user.</p>
+ 
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- ***** Article End ***** -->
+ 
+     <!-- ***** Footer Start ***** -->
+     <footer>
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <div class="footer-content">
+                         <div class="social-icons">
+                             <a href="https://x.com/github" target="_blank"><i class="fa fa-twitter"></i></a>
+                             <a href="https://www.instagram.com/github/" target="_blank"><i class="fa fa-instagram"></i></a>
+                         </div>
+                         <div class="footer-info">
+                             <p>Email: <a href="mailto:support@download-zenmap.github.io">support@download-zenmap.github.io</a></p>
+                             <p><a href="/privacypolicy.html">Privacy Policy</a></p>
+                         </div>
+                         <div class="copyright">
+                             <p>Copyright &copy; 2025</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </footer>
+ 
+     <script src="../assets/js/jquery-2.1.0.min.js"></script>
+     <script src="../assets/js/popper.js"></script>
+     <script src="../assets/js/bootstrap.min.js"></script>
+     <script src="../assets/js/custom.js"></script>
+ 
+ </body>
+ 
+ </html>

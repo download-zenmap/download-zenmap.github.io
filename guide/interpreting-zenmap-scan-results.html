@@ -1,0 +1,169 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+ 
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link
+         href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+         rel="stylesheet">
+ 
+     <title>Interpreting Zenmap Scan Results</title>
+     <meta name="description" content="Learn how to interpret the results of your Zenmap scans. This guide explains port states, service information, OS detection, and how to use the topology view.">
+     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
+     <!-- Additional CSS Files -->
+     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+     <link rel="stylesheet" href="../assets/css/templatemo-training-studio.css">
+ 
+     <!-- Open Graph -->
+     <meta property="og:title" content="Interpreting Zenmap Scan Results">
+     <meta property="og:description" content="A guide to understanding the output of your Zenmap scans.">
+     <meta property="og:type" content="article">
+     <meta property="og:url" content="https://download-zenmap.github.io/guide/interpreting-zenmap-scan-results.html">
+     <meta property="og:image" content="https://download-zenmap.github.io/assets/images/guide/4.png">
+ 
+     <!-- Schema.org -->
+     <script type="application/ld+json">
+     {
+       "@context": "https://schema.org",
+       "@type": "Article",
+       "headline": "Interpreting Zenmap Scan Results",
+       "author": {
+         "@type": "Organization",
+         "name": "The Zenmap Project"
+       },
+       "publisher": {
+         "@type": "Organization",
+         "name": "Zenmap",
+         "logo": {
+           "@type": "ImageObject",
+           "url": "https://download-zenmap.github.io/assets/images/logo.png"
+         }
+       },
+       "image": "https://download-zenmap.github.io/assets/images/guide/4.png",
+       "url": "https://download-zenmap.github.io/guide/interpreting-zenmap-scan-results.html",
+       "datePublished": "2024-01-13",
+       "dateModified": "2025-01-13",
+       "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "https://download-zenmap.github.io/guide/interpreting-zenmap-scan-results.html"
+       }
+     }
+     </script>
+ 
+ </head>
+ 
+ <body>
+ 
+     <!-- ***** Header Area Start ***** -->
+     <header class="header-area header-sticky">
+         <div class="container">
+             <div class="row">
+                 <div class="col-12">
+                     <nav class="main-nav">
+                         <!-- ***** Logo Start ***** -->
+                         <a href="/index.html" class="logo">
+                             <img src="../assets/images/logo.png" alt="Zenmap logo" style="width: 120px;"/>
+                         </a>
+                         <!-- ***** Logo End ***** -->
+                         <!-- ***** Menu Start ***** -->
+                         <ul class="nav">
+                             <li><a href="/index.html">Home</a></li>
+                             <li><a href="/history.html">History</a></li>
+                             <li><a href="/aboutus.html">About Us</a></li>
+                             <li><a href="/guide/" class="active">Guide</a></li>
+                         </ul>
+                         <a class='menu-trigger'>
+                             <span>Menu</span>
+                         </a>
+                         <!-- ***** Menu End ***** -->
+                     </nav>
+                 </div>
+             </div>
+         </div>
+     </header>
+     <!-- ***** Header Area End ***** -->
+ 
+     <!-- ***** Article Start ***** -->
+     <section class="section" id="article-content" style="padding-top: 140px; padding-bottom: 80px;">
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-10 offset-lg-1">
+                     <div class="section-heading">
+                         <h1>Interpreting Zenmap Scan Results</h1>
+                         <img src="../assets/images/line-dec.png" alt="divider">
+                     </div>
+                     <div class="article-body">
+                         <p>Running a scan in Zenmap is only the first step; the real value lies in understanding the results. The output from an Nmap scan can be dense with information, but Zenmap does an excellent job of organizing it into a digestible format. This guide will help you interpret the various components of a Zenmap scan result, from port states to host details, enabling you to turn raw data into actionable intelligence. A proper understanding is crucial, whether you've just done your first download Zenmap or are a long-time user.</p>
+ 
+                         <h3>Understanding Port States</h3>
+                         <p>The most fundamental piece of information in a scan result is the state of the ports on the target host. Nmap reports six possible port states, and Zenmap displays these clearly in the "Ports/Hosts" tab.</p>
+                         <ul>
+                             <li><strong>Open:</strong> An application is actively accepting connections on this port. This is usually what you're looking for.</li>
+                             <li><strong>Closed:</strong> The port is accessible, but there is no application listening on it.</li>
+                             <li><strong>Filtered:</strong> Nmap cannot determine if the port is open or closed because a firewall or other network device is blocking the probes.</li>
+                             <li><strong>Unfiltered:</strong> The port is accessible, but Nmap cannot determine its state. This only happens in an ACK scan.</li>
+                             <li><strong>Open|Filtered:</strong> Nmap cannot determine if the port is open or filtered.</li>
+                             <li><strong>Closed|Filtered:</strong> Nmap cannot determine if the port is closed or filtered.</li>
+                         </ul>
+                         <p>In a typical security audit, "open" ports are of the most interest, as they represent potential entry points into a system. "Filtered" ports are also significant, as they indicate the presence of a firewall.</p>
+ 
+                         <div class="text-center my-4">
+                             <img src="../assets/images/guide/4.png" alt="Zenmap Results" class="img-fluid">
+                         </div>
+ 
+                         <h3>Analyzing Service and Version Information</h3>
+                         <p>If you ran a scan with version detection (`-sV`), Zenmap will provide detailed information about the services running on the open ports. This is displayed in the "Service" and "Version" columns of the "Ports/Hosts" tab. This information is critical for vulnerability assessment. For example, knowing that a server is running an old, unpatched version of an FTP server allows you to look for known exploits for that specific version. The Zenmap interface makes it easy to see this information at a glance.</p>
+ 
+                         <h3>OS Detection and Host Details</h3>
+                         <p>When you run a scan with OS detection (`-O`), Zenmap will attempt to identify the operating system of the target. The results are displayed in the "Host Details" tab. Nmap's OS detection is remarkably accurate and can often pinpoint the exact version and patch level of the OS. This tab also provides a summary of other key information, such as the host's uptime, the number of open ports, and its IP and MAC addresses.</p>
+ 
+                         <h3>Visualizing the Network with the Topology Tab</h3>
+                         <p>The "Topology" tab provides an interactive, graphical representation of the network. Each host is represented as a node, and the lines between them show the network path. The "Controls" button allows you to manipulate the layout, zoom in and out, and even create a fisheye view to focus on a specific area. While it can be a simple diagram for a single host scan, the topology view becomes incredibly powerful when scanning large networks. It can help you understand network architecture, identify choke points, and visualize the relationships between different hosts.</p>
+ 
+                         <h3>Saving and Comparing Scans</h3>
+                         <p>One of Zenmap's most useful features is the ability to save and compare scans. You can save a completed scan by going to "Scan" > "Save Scan." This saves all the information from the scan to a file. To compare two scans, open a saved scan and then go to "Tools" > "Compare Results." A new window will open, allowing you to select another scan to compare it with. Zenmap will then highlight the differences between the two scans, such as new hosts, newly opened or closed ports, and changes in service versions. This is an essential feature for ongoing network monitoring and security auditing.</p>
+ 
+                         <h3>Conclusion</h3>
+                         <p>Interpreting scan results is a skill that develops with practice. By understanding the meaning of port states, analyzing service and OS information, and utilizing Zenmap's powerful visualization and comparison tools, you can gain deep insights into the security of your network. We encourage you to experiment with different scan types and explore all the information that Zenmap provides. The more you scan, the more proficient you will become at turning data into knowledge.</p>
+ 
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- ***** Article End ***** -->
+ 
+     <!-- ***** Footer Start ***** -->
+     <footer>
+         <div class="container">
+             <div class="row">
+                 <div class="col-lg-12">
+                     <div class="footer-content">
+                         <div class="social-icons">
+                             <a href="https://x.com/github" target="_blank"><i class="fa fa-twitter"></i></a>
+                             <a href="https://www.instagram.com/github/" target="_blank"><i class="fa fa-instagram"></i></a>
+                         </div>
+                         <div class="footer-info">
+                             <p>Email: <a href="mailto:support@download-zenmap.github.io">support@download-zenmap.github.io</a></p>
+                             <p><a href="/privacypolicy.html">Privacy Policy</a></p>
+                         </div>
+                         <div class="copyright">
+                             <p>Copyright &copy; 2025</p>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </footer>
+ 
+     <script src="../assets/js/jquery-2.1.0.min.js"></script>
+     <script src="../assets/js/popper.js"></script>
+     <script src="../assets/js/bootstrap.min.js"></script>
+     <script src="../assets/js/custom.js"></script>
+ 
+ </body>
+ 
+ </html>
